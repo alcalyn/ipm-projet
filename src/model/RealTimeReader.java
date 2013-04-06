@@ -46,7 +46,6 @@ public class RealTimeReader extends Thread {
 			
 			for(int i = 0; i < (int) (PeriodeReader.SAMPLES_RATE * LATENCE); i++) {
 				short s = periode.getAtSecond((double) (index + i) / (double) PeriodeReader.SAMPLES_RATE);
-				System.out.println(s);
 				buf.putShort(s);
 			}
 			
