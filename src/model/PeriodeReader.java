@@ -13,7 +13,7 @@ public class PeriodeReader {
 	public static final int SAMPLES_RATE = 44100;
 	
 	
-	private static SourceDataLine createLine() throws LineUnavailableException {
+	public static SourceDataLine createLine() throws LineUnavailableException {
 		SourceDataLine line;
 		
 		AudioFormat format = new AudioFormat(SAMPLES_RATE, 16, 1, true, true);
@@ -53,8 +53,8 @@ public class PeriodeReader {
 	}
 	
 	
-	public static void playRealTime(Periode periode) {
-		// TODO
+	public static RealTimeReader playRealTime(Periode periode) {
+		return new RealTimeReader(periode);
 	}
 	
 	
