@@ -2,17 +2,11 @@ package model;
 
 import java.nio.ByteBuffer;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-
 public class Periode {
 	
 	
-	private int sampling = 2000;
-	private double duree; // en seconde
+	private int sampling = 100000;
+	private double duree;
 	private short [] courbe;
 	
 	
@@ -29,11 +23,11 @@ public class Periode {
 		this.duree = duree;
 	}
 	
-	public int getSampling() {
+	public int sampling() {
 		return sampling;
 	}
 
-	public void setSampling(int sampling) {
+	public void sampling(int sampling) {
 		this.sampling = sampling;
 	}
 
@@ -76,9 +70,9 @@ public class Periode {
 	
 	
 	public ByteBuffer toByteBuffer() {
-		ByteBuffer buf = ByteBuffer.allocate(getSampling() * 2);
+		ByteBuffer buf = ByteBuffer.allocate(sampling * 2);
     	
-    	for(int i=0;i<getSampling();i++) {
+    	for(int i=0;i<sampling;i++) {
     		short s = get(i);
     		buf.putShort(s);
     	}
@@ -88,7 +82,7 @@ public class Periode {
 	
 	public void setNoise() {
 		for(int i=0;i<sampling;i++) {
-			set(i, Math.random());
+			set(i, Math.random() * 2 - 1);
 		}
 	}
 	
