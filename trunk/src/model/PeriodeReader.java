@@ -54,7 +54,9 @@ public class PeriodeReader {
 	
 	
 	public static RealTimeReader playRealTime(Periode periode) {
-		return new RealTimeReader(periode);
+		RealTimeReader rtr = new RealTimeReader(periode);
+		rtr.play();
+		return rtr;
 	}
 	
 	

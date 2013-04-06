@@ -49,17 +49,14 @@ public class RealTimeReader extends Thread {
 				buf.putShort(s);
 			}
 			
-			index = (index + PeriodeReader.SAMPLES_RATE * LATENCE) % 1;
+			index += PeriodeReader.SAMPLES_RATE * LATENCE;
 			
-			System.out.print("appending... ");
 			line.write(buf.array(), 0, buf.position());
-			System.out.println("[OK]");
 			
 			do {
 				available = line.available();
 				seuil = (int) (PeriodeReader.SAMPLES_RATE * (1 - LATENCE));
 				
-				System.out.println(available+" / "+seuil+" / "+line.getBufferSize());
 				try {
 					Thread.sleep((long) (LATENCE * 100));
 				} catch (InterruptedException e) {

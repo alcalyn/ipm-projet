@@ -1,6 +1,7 @@
 package appli;
 
 import model.Periode;
+import model.PeriodeReader;
 import views.PeriodeView;
 
 
@@ -16,7 +17,11 @@ public class Appli {
 		
 		PeriodeView view = new PeriodeView();
 		
-		periode.addObserver(view);
+		view.observe(periode);
+		
+		periode.setSin();
+		periode.duree((double) 1 / (double) 600);
+		PeriodeReader.playRealTime(periode);
 		
 		System.out.println("end");
 	}
