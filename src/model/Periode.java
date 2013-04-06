@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 public class Periode extends ObservablePeriode {
 	
 	
-	private int sampling = 2000;
+	private int sampling = 20000;
 	private double duree;
 	private short [] courbe;
 	
@@ -71,8 +71,11 @@ public class Periode extends ObservablePeriode {
 	 * @param value valeur dans [-1;1[ avec -1 amplitude min, et 1 amplitude max
 	 */
 	public void set(int index, double value) {
-		courbe[index] = (short) (value * Short.MAX_VALUE);
-		notifyObservers(ModelUpdate.COURBE, new Object[] {index, value});
+		double _value = value;
+		if(_value < -1) _value = -1;
+		if(_value > 1) _value = 1;
+		courbe[index] = (short) (_value * Short.MAX_VALUE);
+		notifyObservers(ModelUpdate.COURBE, new Object[] {index, _value});
 	}
 	
 	
@@ -87,9 +90,21 @@ public class Periode extends ObservablePeriode {
     	return buf;
 	}
 	
-	public void setNoise() {
+	
+	public void setSilenceMiddle() {
 		for(int i=0;i<sampling;i++) {
-			set(i, Math.random());
+			set(i, 0);
+		}
+	}
+	
+	public void setNoise() {
+		double l1 = 0.001;
+		double l2 = 0.01;
+		double b = 0;
+		
+		for(int i=0;i<sampling;i++) {
+			b += (Math.random() - 0.5) * l1 + (Math.random() - 0.5) * l2;
+			set(i, b);
 		}
 	}
 	
