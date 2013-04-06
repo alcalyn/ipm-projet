@@ -11,15 +11,14 @@ import javax.sound.sampled.SourceDataLine;
 public class Periode {
 	
 	
-	private static final int SAMPLES = 44100;
-	
+	private int sampling = 2000;
 	private double duree; // en seconde
 	private short [] courbe;
 	
 	
 	public Periode() {
 		duree = (double) 1 / (double) 440;
-		courbe = new short[SAMPLES];
+		courbe = new short[sampling];
 	}
 	
 	public double duree() {
@@ -30,17 +29,38 @@ public class Periode {
 		this.duree = duree;
 	}
 	
+	public int getSampling() {
+		return sampling;
+	}
 
+	public void setSampling(int sampling) {
+		this.sampling = sampling;
+	}
+
+	/**
+	 * 
+	 * @param index de l'echantillon
+	 * @return
+	 */
+	public short get(int index) {
+		return courbe[index];
+	}
+	
+	
 	/**
 	 * 
 	 * @param valeur dans [0;1[
 	 * @return le valeur de la courbe a ce point
 	 */
 	public short get(double at) {
-		return courbe[(int) ((at % 1) * SAMPLES)];
+		return courbe[(int) ((at % 1) * sampling)];
 	}
 	
-	
+	/**
+	 * 
+	 * @param s temps en seconde pour lequel retourner l'echantillon
+	 * @return
+	 */
 	public short getAtSecond(double s) {
 		return get(s / duree);
 	}
@@ -55,49 +75,30 @@ public class Periode {
 	}
 	
 	
+	public ByteBuffer toByteBuffer() {
+		ByteBuffer buf = ByteBuffer.allocate(getSampling() * 2);
+    	
+    	for(int i=0;i<getSampling();i++) {
+    		short s = get(i);
+    		buf.putShort(s);
+    	}
+    	
+    	return buf;
+	}
+	
 	public void setNoise() {
-		for(int i=0;i<SAMPLES;i++) {
+		for(int i=0;i<sampling;i++) {
 			set(i, Math.random());
 		}
 	}
 	
 	public void setSin() {
-		for(int i=0;i<SAMPLES;i++) {
-			double v = Math.sin(((double) i / (double) SAMPLES) * (Math.PI * 2));
+		for(int i=0;i<sampling;i++) {
+			double v = Math.sin(((double) i / (double) sampling) * (Math.PI * 2));
 			set(i, v);
 		}
 	}
 	
-	
-	public void play(int sec) throws LineUnavailableException {
-		final int SAMPLES_RATE = 44100;
-		
-		SourceDataLine line;
-		
-		AudioFormat format = new AudioFormat(SAMPLES_RATE, 16, 1, true, true);
-		DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
-		
-		if (!AudioSystem.isLineSupported(info)) {
-			System.out.println("Line matching " + info + " is not supported.");
-			throw new LineUnavailableException();
-		}
-		
-		line = (SourceDataLine) AudioSystem.getLine(info);
-		line.open(format);
-		line.start();
-		
-	    ByteBuffer cBuf = ByteBuffer.allocate(SAMPLES * 2);
-    	
-    	for(int i=0;i<44100;i++) {
-    		short s = getAtSecond((double) i / (double) 44100);
-    		cBuf.putShort(s);
-    	}
-    	
-    	for(int i=0;i<sec;i++) line.write(cBuf.array(), 0, SAMPLES * 2);
-    	
-    	line.drain();
-    	line.close();
-	}
 	
 	
 }
