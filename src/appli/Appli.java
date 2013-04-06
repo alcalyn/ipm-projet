@@ -1,8 +1,7 @@
 package appli;
 
 import model.Periode;
-import model.PeriodeReader;
-import model.RealTimeReader;
+import views.PeriodeView;
 
 
 public class Appli {
@@ -13,19 +12,11 @@ public class Appli {
 		
 		System.out.println("start");
 		
-		Periode p = new Periode();
-		p.duree(1.0/800.0);
-		p.setNoise();
-		RealTimeReader r = PeriodeReader.playRealTime(p);
-		System.out.println("play");
-		r.play();
+		Periode periode = new Periode();
 		
-		Thread.sleep(500);
+		PeriodeView view = new PeriodeView();
 		
-		p.setSin();
-		
-		Thread.sleep(5000);
-		r.close();
+		periode.addObserver(view);
 		
 		System.out.println("end");
 	}

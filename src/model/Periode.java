@@ -2,7 +2,7 @@ package model;
 
 import java.nio.ByteBuffer;
 
-public class Periode {
+public class Periode extends ObservablePeriode {
 	
 	
 	private int sampling = 4000;
@@ -21,6 +21,7 @@ public class Periode {
 
 	public void duree(double duree) {
 		this.duree = duree;
+		notifyObservers(ModelUpdate.DUREE, duree);
 	}
 	
 	public int sampling() {
@@ -29,6 +30,7 @@ public class Periode {
 
 	public void sampling(int sampling) {
 		this.sampling = sampling;
+		notifyObservers(ModelUpdate.SAMPLING, sampling);
 	}
 
 	/**
@@ -66,6 +68,7 @@ public class Periode {
 	 */
 	public void set(int index, double value) {
 		courbe[index] = (short) (value * Short.MAX_VALUE);
+		notifyObservers(ModelUpdate.COURBE, new Object[] {index, value});
 	}
 	
 	
