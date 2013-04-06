@@ -10,7 +10,7 @@ public class RealTimeReader extends Thread {
 	/**
 	 * double LATENCE doit etre compris dans [0;1[
 	 */
-	private static final double LATENCE = 0.020;
+	private static final double LATENCE = 0.050;
 	
 	
 	private Periode periode;

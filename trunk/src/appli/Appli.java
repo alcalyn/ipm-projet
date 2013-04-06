@@ -19,8 +19,8 @@ public class Appli {
 		
 		view.observe(periode);
 		
-		periode.setSin();
-		periode.duree((double) 1 / (double) 600);
+		periode.setSilenceMiddle();
+		periode.duree(1.0 / 500.0);
 		PeriodeReader.playRealTime(periode);
 		
 		System.out.println("end");
