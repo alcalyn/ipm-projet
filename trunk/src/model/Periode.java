@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 public class Periode {
 	
 	
-	private int sampling = 100000;
+	private int sampling = 4000;
 	private double duree;
 	private short [] courbe;
 	
