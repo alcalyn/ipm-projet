@@ -25,8 +25,9 @@ public class Appli {
 		
 		
 		periode.setSilenceMiddle();
-		periode.setSilenceMiddle();
-		periode.duree(2.0);
+		periode.setSin();
+		periode.duree(1.0 / 200.0);
+		view.selectTool(Tool.SNAP);
 		PeriodeReader.playRealTime(periode);
 		
 		System.out.println("end");

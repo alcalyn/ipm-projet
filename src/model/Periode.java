@@ -1,11 +1,12 @@
 package model;
 
 import java.nio.ByteBuffer;
+import java.util.StringTokenizer;
 
 public class Periode extends ObservablePeriode {
 	
 	
-	private int sampling = 6000;
+	private int sampling = 4096;
 	private double duree;
 	private short [] courbe;
 	
@@ -47,14 +48,28 @@ public class Periode extends ObservablePeriode {
 	}
 	
 	
+	
 	/**
 	 * 
 	 * @param valeur dans [0;1[
 	 * @return le valeur de la courbe a ce point
 	 */
 	public short get(double at) {
-		int index = (int) ((at % 1) * sampling);
-		return courbe[index];
+		double continu = (double) ((double) at % 1.0) * (double) sampling;
+		short sample;
+		
+		int discret0 = (int) Math.floor(continu);
+		int discret1 = (int) Math.ceil(continu);
+		
+		if(discret0 == discret1) discret1++;
+		
+		double coef0 = discret1 - continu;
+		double coef1 = continu - discret0;
+		double p0 = courbe[discret0] * coef0;
+		double p1 = courbe[discret1 % sampling] * coef1;
+		sample = (short) ((p0 + p1) / 2);
+		
+		return sample;
 	}
 	
 	/**
@@ -73,9 +88,13 @@ public class Periode extends ObservablePeriode {
 	 */
 	public void set(int index, double value) {
 		double _value = value;
+		
 		if(_value < -1) _value = -1;
 		if(_value > 1) _value = 1;
-		courbe[index] = (short) (_value * Short.MAX_VALUE);
+		
+		short sample = (short) (_value * Short.MAX_VALUE);
+		
+		courbe[index] = sample;
 	}
 	
 	
