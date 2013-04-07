@@ -49,6 +49,8 @@ public class CourbePanel extends JPanel implements Observer {
 		}
 	}
 	
+	
+	
 	private void drawCourbe(Graphics g) {
 		g.setColor(Color.BLACK);
 		for(int i=1;i<periode.sampling();i++) {
