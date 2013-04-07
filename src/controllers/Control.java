@@ -2,9 +2,11 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import views.PeriodeView;
 
+import model.FileManager;
 import model.Periode;
 
 public class Control implements ActionListener {
@@ -12,7 +14,9 @@ public class Control implements ActionListener {
 	
 	public static final int
 		SELECT_TOOL_SNAP = 5,
-		SELECT_TOOL_WRITE = 6;
+		SELECT_TOOL_WRITE = 6,
+		SAVE = 7,
+		SAVE_AS = 8;
 	
 	
 	private static Periode periode;
@@ -36,6 +40,22 @@ public class Control implements ActionListener {
 				
 			case SELECT_TOOL_WRITE:
 				periode_view.selectTool(Tool.WRITE);
+				break;
+			
+			case SAVE:
+				try {
+					FileManager.save(periode);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				break;
+			
+			case SAVE_AS:
+				try {
+					FileManager.saveAs(periode);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				break;
 				
 			default:
