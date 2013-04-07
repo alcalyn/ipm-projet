@@ -55,4 +55,9 @@ public class FileManager {
 	}
 	
 	
+	public static void newFile() {
+		current_file = null;
+	}
+	
+	
 }
