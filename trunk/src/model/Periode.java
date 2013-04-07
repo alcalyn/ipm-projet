@@ -1,7 +1,6 @@
 package model;
 
 import java.nio.ByteBuffer;
-import java.util.StringTokenizer;
 
 public class Periode extends ObservablePeriode {
 	
@@ -143,8 +142,8 @@ public class Periode extends ObservablePeriode {
 	}
 	
 	public void setNoise() {
-		double l1 = 0.001;
-		double l2 = 0.01;
+		double l1 = 0.003;
+		double l2 = 0.03;
 		double b = 0;
 		
 		for(int i=0;i<sampling;i++) {
