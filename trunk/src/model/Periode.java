@@ -1,8 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-public class Periode extends ObservablePeriode {
+public class Periode extends ObservablePeriode implements Serializable {
+	
+	private static final long serialVersionUID = 8648757381097933473L;
+	
 	
 	
 	private int sampling = 4096;
@@ -188,6 +192,13 @@ public class Periode extends ObservablePeriode {
 		}
 		
 		flushCourbe();
+	}
+	
+	
+	public void load(Periode p) {
+		this.sampling = p.sampling;
+		this.duree = p.duree;
+		this.courbe = p.courbe;
 	}
 	
 	
