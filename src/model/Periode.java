@@ -15,8 +15,8 @@ public class Periode extends ObservablePeriode implements Serializable {
 	
 	
 	public Periode() {
-		duree = (double) 1 / (double) 440;
 		courbe = new short[sampling];
+		reinit();
 	}
 	
 	public double duree() {
@@ -194,6 +194,12 @@ public class Periode extends ObservablePeriode implements Serializable {
 		flushCourbe();
 	}
 	
+	
+	public void reinit() {
+		setSilenceMiddle();
+		duree = 1.0 / 440.0;
+		flushCourbe();
+	}
 	
 	public void load(Periode p) {
 		this.sampling = p.sampling;

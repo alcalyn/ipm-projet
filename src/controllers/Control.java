@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import views.PeriodeView;
 
 import model.FileManager;
@@ -21,7 +23,10 @@ public class Control implements ActionListener {
 		OPEN = 9,
 		QUIT = 10,
 		PLAY = 11,
-		STOP = 12;
+		STOP = 12,
+		NOUVEAU = 13,
+		CHANGE_DUREE = 14,
+		CHANGE_FREQUENCE = 15;
 	
 	
 	private static Periode periode;
@@ -37,6 +42,8 @@ public class Control implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
+		String s;
+		
 		switch (action) {
 			case SELECT_TOOL_SNAP:
 				periode_view.selectTool(Tool.SNAP);
@@ -84,6 +91,49 @@ public class Control implements ActionListener {
 			case STOP:
 				PeriodeReader.stop();
 				PeriodeReader.prepare(periode);
+				break;
+			
+			case NOUVEAU:
+				PeriodeReader.stop();
+				periode.reinit();
+				FileManager.newFile();
+				PeriodeReader.prepare(periode);
+				break;
+			
+			case CHANGE_DUREE:
+				s = (String) JOptionPane.showInputDialog(
+						periode_view,
+						"Nouvelle duree de la periode en secondes :",
+						"Parametre de la periode",
+						JOptionPane.INFORMATION_MESSAGE,
+						null,
+						null,
+						Double.toString(periode.duree())
+				);
+				
+				if(s != null) {
+					double d = Double.parseDouble(s);
+					periode.duree(d);
+				}
+				
+				break;
+			
+			case CHANGE_FREQUENCE:
+				s = (String) JOptionPane.showInputDialog(
+						periode_view,
+						"Nouvelle duree de la periode en hertz :",
+						"Parametre de la periode",
+						JOptionPane.INFORMATION_MESSAGE,
+						null,
+						null,
+						Double.toString(1.0 / periode.duree())
+				);
+				
+				if(s != null) {
+					double d = Double.parseDouble(s);
+					periode.duree(1.0 / d);
+				}
+				
 				break;
 				
 			default:
