@@ -14,6 +14,7 @@ public class Menu extends JMenuBar {
 	
 	private JMenu		fichier;
 	private JMenuItem		nouveau;
+	private JMenuItem		open;
 	private JMenuItem		save;
 	private JMenuItem		save_as;
 	
@@ -37,13 +38,18 @@ public class Menu extends JMenuBar {
 	private void initFichier() {
 		fichier = new JMenu("Fichier");
 		nouveau = new JMenuItem("Nouveau");
+		open = new JMenuItem("Ouvrir");
 		save = new JMenuItem("Enregistrer");
 		save_as = new JMenuItem("Enregistrer sous...");
+		
+		
+		open.addActionListener(new Control(Control.OPEN));
 		
 		save.addActionListener(new Control(Control.SAVE));
 		save_as.addActionListener(new Control(Control.SAVE_AS));
 		
 		fichier.add(nouveau);
+		fichier.add(open);
 		
 		fichier.addSeparator();
 		
