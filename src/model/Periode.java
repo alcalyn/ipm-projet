@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 public class Periode extends ObservablePeriode {
 	
 	
-	private int sampling = 20000;
+	private int sampling = 1000;
 	private double duree;
 	private short [] courbe;
 	
