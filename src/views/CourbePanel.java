@@ -23,7 +23,6 @@ public class CourbePanel extends JPanel implements Observer {
 	
 	
 	private Periode periode;
-	private int last_edit = -1;
 	
 	
 	public CourbePanel() {
@@ -34,10 +33,9 @@ public class CourbePanel extends JPanel implements Observer {
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		if(periode == null) {
-			drawBg(g);
-		} else {
-			drawBg(g);
+		drawBg(g);
+		
+		if(periode != null) {
 			drawCourbe(g);
 		}
 	}
