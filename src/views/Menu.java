@@ -17,6 +17,12 @@ public class Menu extends JMenuBar {
 	private JMenuItem		open;
 	private JMenuItem		save;
 	private JMenuItem		save_as;
+	private JMenuItem		quit;
+	
+	
+	private JMenu		son;
+	private JMenuItem		lire;
+	private JMenuItem		stopper;
 	
 	
 	private JMenu		affichage;
@@ -29,6 +35,7 @@ public class Menu extends JMenuBar {
 		super();
 		
 		initFichier();
+		initSon();
 		initAffichage();
 		initAbout();
 	}
@@ -41,12 +48,12 @@ public class Menu extends JMenuBar {
 		open = new JMenuItem("Ouvrir");
 		save = new JMenuItem("Enregistrer");
 		save_as = new JMenuItem("Enregistrer sous...");
-		
+		quit = new JMenuItem("Quitter");
 		
 		open.addActionListener(new Control(Control.OPEN));
-		
 		save.addActionListener(new Control(Control.SAVE));
 		save_as.addActionListener(new Control(Control.SAVE_AS));
+		quit.addActionListener(new Control(Control.QUIT));
 		
 		fichier.add(nouveau);
 		fichier.add(open);
@@ -56,7 +63,25 @@ public class Menu extends JMenuBar {
 		fichier.add(save);
 		fichier.add(save_as);
 		
+		fichier.addSeparator();
+		
+		fichier.add(quit);
+		
 		add(fichier);
+	}
+	
+	private void initSon() {
+		son = new JMenu("Son");
+		lire = new JMenuItem("Lire");
+		stopper = new JMenuItem("Stopper");
+		
+		lire.addActionListener(new Control(Control.PLAY));
+		stopper.addActionListener(new Control(Control.STOP));
+		
+		son.add(lire);
+		son.add(stopper);
+		
+		add(son);
 	}
 	
 	private void initAffichage() {

@@ -31,7 +31,7 @@ public class Appli {
 		periode.setNoise();
 		periode.duree(1.0 / 300.0);
 		view.selectTool(Tool.SNAP);
-		PeriodeReader.playRealTime(periode);
+		PeriodeReader.prepare(periode);
 		
 		System.out.println("end");
 	}
