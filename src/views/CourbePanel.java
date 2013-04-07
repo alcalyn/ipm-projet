@@ -29,46 +29,7 @@ public class CourbePanel extends JPanel implements Observer {
 	public CourbePanel() {
 		super();
 		
-		addMouseListener(new MouseAdapter() {
-			
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 		
-		addMouseMotionListener(new MouseMotionAdapter() {
-			
-			public void mouseMoved(MouseEvent e) {
-				
-			}
-			
-			public void mouseDragged(MouseEvent e) {
-				if(periode != null) {
-					snap(e.getX(), e.getY());
-				}
-			}
-		});
 	}
 	
 	@Override
@@ -120,30 +81,7 @@ public class CourbePanel extends JPanel implements Observer {
 	}
 	
 	
-	private void snap(int x, int y) {
-		System.out.println("snap");
-		double force = 0.200;
-		
-		int affect_size = (int) (periode.sampling() * force);
-		int mouse_idx = (x * periode.sampling()) / getWidth();
-		double mouse_y = (double) y / (double) getHeight() - 0.5;
-		mouse_y *= -2.0;
-		int from = mouse_idx - affect_size / 2;
-		int to = mouse_idx + affect_size / 2;
-		
-		System.out.println(mouse_idx+" : "+from+" > "+to);
-		for(int i=from;i<to;i++) {
-			double dist = (double) Math.abs(i - mouse_idx) / (double) Math.abs(to - mouse_idx);
-			double local_force = force * (1 - dist);
-			
-			double sample = (double) periode.get(i) / (double) Short.MAX_VALUE;
-			double diff = mouse_y - sample;
-			
-			System.out.println(diff * local_force);
-			
-			periode.set(i, sample + diff * local_force);
-		}
-	}
+	
 	
 	
 	

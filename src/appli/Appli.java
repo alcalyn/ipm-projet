@@ -1,5 +1,6 @@
 package appli;
 
+import controllers.Tool;
 import model.Periode;
 import model.PeriodeReader;
 import views.PeriodeView;
@@ -15,9 +16,13 @@ public class Appli {
 		
 		Periode periode = new Periode();
 		
+		Tool.setPeriode(periode);
+		
 		PeriodeView view = new PeriodeView();
 		
 		view.observe(periode);
+		
+		
 		
 		periode.setSilenceMiddle();
 		periode.duree(1.0 / 500.0);

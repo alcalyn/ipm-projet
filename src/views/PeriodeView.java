@@ -6,6 +6,9 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
+import controllers.MouseToolListener;
+import controllers.Tool;
+
 import model.ModelUpdate;
 import model.Periode;
 
@@ -18,6 +21,10 @@ public class PeriodeView extends JFrame implements Observer {
 	private CourbePanel panel_courbe;
 	
 	
+	private Tool tool = null;
+	private MouseToolListener mouse_tool;
+	
+	
 	public PeriodeView() {
 		super("PeriodeView");
 		
@@ -28,8 +35,15 @@ public class PeriodeView extends JFrame implements Observer {
 		menu = new Menu();	
 		panel_courbe = new CourbePanel();
 		
+		selectTool(Tool.SNAP);
+		mouse_tool = new MouseToolListener(this);
+		
+		panel_courbe.addMouseListener(mouse_tool);
+		panel_courbe.addMouseMotionListener(mouse_tool);
+		
 		add(menu, BorderLayout.NORTH);
 		add(panel_courbe, BorderLayout.CENTER);
+		
 		
 		setVisible(true);
 	}
@@ -50,5 +64,13 @@ public class PeriodeView extends JFrame implements Observer {
 		}
 	}
 	
+	
+	public void selectTool(int tool) {
+		this.tool = Tool.getTool(tool, panel_courbe);
+	}
+	
+	public Tool getTool() {
+		return tool;
+	}
 
 }
