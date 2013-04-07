@@ -3,12 +3,6 @@ package views;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -69,15 +63,8 @@ public class CourbePanel extends JPanel implements Observer {
 			);
 			
 			g.drawLine(a.x, a.y, b.x, b.y);
-			
-			//fillDisc(g, a.x, a.y, 4);
 		}
 	}
-	
-	private void fillDisc(Graphics g, int x, int y, int size) {
-		g.fillOval(x - size / 2, y - size / 2, size, size);
-	}
-	
 	
 	
 	

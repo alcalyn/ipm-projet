@@ -2,7 +2,6 @@ package controllers;
 
 import java.awt.event.MouseEvent;
 
-import model.ModelUpdate;
 import views.CourbePanel;
 
 public class WriteTool extends ToolAdapter {
@@ -24,12 +23,19 @@ public class WriteTool extends ToolAdapter {
 	
 	
 	private void write(int x, int y) {
-		double at = (double) x / (double) courbe_panel.getWidth();
+		final int brush_size = 4;
+		double at0 = (double) (x - brush_size / 2) / (double) courbe_panel.getWidth();
+		double at1 = (double) (x + brush_size / 2) / (double) courbe_panel.getWidth();
 		double value = (double) y / (double) courbe_panel.getHeight();
+		
+		int s0 = (int) (at0 * periode.sampling());
+		int s1 = (int) (at1 * periode.sampling());
 		
 		value = -value * 2 + 1;
 		
-		periode.set(at, value);
+		for(int i=s0;i<s1;i++)
+			periode.set(i, value);
+		
 		
 		periode.flushCourbe();
 	}

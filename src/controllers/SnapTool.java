@@ -2,8 +2,6 @@ package controllers;
 
 import java.awt.event.MouseEvent;
 
-import model.ModelUpdate;
-
 import views.CourbePanel;
 
 public class SnapTool extends ToolAdapter {

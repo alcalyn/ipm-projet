@@ -1,5 +1,6 @@
 package appli;
 
+import controllers.Control;
 import controllers.Tool;
 import model.Periode;
 import model.PeriodeReader;
@@ -17,15 +18,18 @@ public class Appli {
 		Periode periode = new Periode();
 		
 		Tool.setPeriode(periode);
+		Control.setPeriode(periode);
 		
 		PeriodeView view = new PeriodeView();
+		
+		Control.setPeriodeView(view);
 		
 		view.observe(periode);
 		
 		
 		
 		periode.setNoise();
-		periode.duree(1.0);
+		periode.duree(1.0 / 300.0);
 		view.selectTool(Tool.SNAP);
 		PeriodeReader.playRealTime(periode);
 		
