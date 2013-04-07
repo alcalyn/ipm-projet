@@ -26,7 +26,7 @@ public class PeriodeView extends JFrame implements Observer {
 	
 	
 	public PeriodeView() {
-		super("PeriodeView");
+		super("PeriodSnake");
 		
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
