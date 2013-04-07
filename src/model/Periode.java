@@ -71,6 +71,33 @@ public class Periode extends ObservablePeriode {
 		return sample;
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @param valeur dans [0;1[
+	 * @return le valeur de la courbe a ce point entre [-1;1[
+	 */
+	public double getDouble(double at) {
+		double continu = (double) ((double) at % 1.0) * (double) sampling;
+		short sample;
+		
+		int discret0 = (int) Math.floor(continu);
+		int discret1 = (int) Math.ceil(continu);
+		
+		if(discret0 == discret1) discret1++;
+		
+		double coef0 = discret1 - continu;
+		double coef1 = continu - discret0;
+		double p0 = courbe[discret0] * coef0;
+		double p1 = courbe[discret1 % sampling] * coef1;
+		sample = (short) ((p0 + p1) / 2);
+		
+		return sample;
+	}
+	
+	
+	
 	/**
 	 * 
 	 * @param s temps en seconde pour lequel retourner l'echantillon
