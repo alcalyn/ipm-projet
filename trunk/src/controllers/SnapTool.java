@@ -19,6 +19,13 @@ public class SnapTool extends ToolAdapter {
 		}
 	}
 	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if(periode != null) {
+			snap(e.getX(), e.getY());
+		}
+	}
+	
 	
 	private void snap(int x, int y) {
 		double force = 0.200;
@@ -40,7 +47,7 @@ public class SnapTool extends ToolAdapter {
 			periode.set(i, sample + diff * local_force);
 		}
 		
-		periode.notifyObservers(ModelUpdate.COURBE);
+		periode.flushCourbe();
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 
+
 import model.Periode;
 
 import views.CourbePanel;
@@ -12,7 +13,8 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 	
 	
 	public static final int
-		SNAP = 5;
+		SNAP = 5,
+		WRITE = 6;
 	
 	
 	private static HashMap<Integer, Tool> singletons = new HashMap<Integer, Tool>();
@@ -35,6 +37,10 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 			switch (tool) {
 			case SNAP:
 				singletons.put(tool, new SnapTool(courbe_panel));
+				break;
+			
+			case WRITE:
+				singletons.put(tool, new WriteTool(courbe_panel));
 				break;
 	
 			default:
