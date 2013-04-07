@@ -22,7 +22,7 @@ public class RealTimeReader extends Thread {
 	public RealTimeReader(Periode periode) {
 		super();
 		this.periode = periode;
-		init();
+		start();
 	}
 	
 	private void init() {
@@ -37,6 +37,15 @@ public class RealTimeReader extends Thread {
 	
 	@Override
 	public void run() {
+		init();
+		
+		while(reading == false)
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		
 		double index = 0;
 		int available;
 		int seuil;
@@ -72,7 +81,6 @@ public class RealTimeReader extends Thread {
 	public void play() {
 		if(!reading) {
 			reading = true;
-			start();
 		}
 	}
 	

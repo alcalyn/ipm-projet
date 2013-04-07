@@ -8,6 +8,7 @@ import views.PeriodeView;
 
 import model.FileManager;
 import model.Periode;
+import model.PeriodeReader;
 
 public class Control implements ActionListener {
 	
@@ -18,7 +19,9 @@ public class Control implements ActionListener {
 		SAVE = 7,
 		SAVE_AS = 8,
 		OPEN = 9,
-		QUIT = 10;
+		QUIT = 10,
+		PLAY = 11,
+		STOP = 12;
 	
 	
 	private static Periode periode;
@@ -73,6 +76,15 @@ public class Control implements ActionListener {
 			case QUIT:
 				System.exit(0);
 				break;
+			
+			case PLAY:
+				PeriodeReader.play(periode);
+				break;
+			
+			case STOP:
+				PeriodeReader.stop();
+				PeriodeReader.prepare(periode);
+				break;
 				
 			default:
 				break;
@@ -97,5 +109,5 @@ public class Control implements ActionListener {
 	public static void setPeriodeView(PeriodeView periode_view) {
 		Control.periode_view = periode_view;
 	}
-
+	
 }
