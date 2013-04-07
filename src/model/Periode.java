@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 public class Periode extends ObservablePeriode {
 	
 	
-	private int sampling = 4096;
+	private int sampling = 6000;
 	private double duree;
 	private short [] courbe;
 	
@@ -53,7 +53,8 @@ public class Periode extends ObservablePeriode {
 	 * @return le valeur de la courbe a ce point
 	 */
 	public short get(double at) {
-		return courbe[(int) ((at % 1) * sampling)];
+		int index = (int) ((at % 1) * sampling);
+		return courbe[index];
 	}
 	
 	/**
@@ -78,6 +79,30 @@ public class Periode extends ObservablePeriode {
 	}
 	
 	
+	/**
+	 * 
+	 * @param position dand la courbe dans [0;1[
+	 * @param value valeur dans [-1;1[ avec -1 amplitude min, et 1 amplitude max
+	 */
+	public void set(double at, double value) {
+		double _value = value;
+		if(_value < -1) _value = -1;
+		if(_value > 1) _value = 1;
+		
+		int index = (int) ((double) sampling * at);
+		
+		courbe[index] = (short) (_value * Short.MAX_VALUE);
+	}
+	
+	
+	/**
+	 * Notify observers from edit
+	 */
+	public void flushCourbe() {
+		notifyObservers(ModelUpdate.COURBE);
+	}
+	
+	
 	public ByteBuffer toByteBuffer() {
 		ByteBuffer buf = ByteBuffer.allocate(sampling * 2);
     	
@@ -95,7 +120,7 @@ public class Periode extends ObservablePeriode {
 			set(i, 0);
 		}
 		
-		notifyObservers(ModelUpdate.COURBE);
+		flushCourbe();
 	}
 	
 	public void setNoise() {
@@ -108,7 +133,7 @@ public class Periode extends ObservablePeriode {
 			set(i, b);
 		}
 		
-		notifyObservers(ModelUpdate.COURBE);
+		flushCourbe();
 	}
 	
 	public void setSin() {
@@ -117,7 +142,7 @@ public class Periode extends ObservablePeriode {
 			set(i, v);
 		}
 		
-		notifyObservers(ModelUpdate.COURBE);
+		flushCourbe();
 	}
 	
 	
