@@ -1,8 +1,10 @@
 package model;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class Res {
@@ -22,6 +24,14 @@ public class Res {
 	public static Image getImage(String res) {
 		ImageIcon img = new ImageIcon(path(res));
 		return img.getImage();
+	}
+	
+	public static Icon getIcon(String res) {
+		return new ImageIcon(path(res));
+	}
+	
+	public static Icon getIcon(String res, Dimension dimension) {
+		return new ImageIcon(new ImageIcon(path(res)).getImage().getScaledInstance(dimension.width, dimension.height, Image.SCALE_SMOOTH));
 	}
 	
 	
