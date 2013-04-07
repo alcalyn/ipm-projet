@@ -7,11 +7,11 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import controllers.MouseToolListener;
-import controllers.Tool;
-
 import model.ModelUpdate;
 import model.Periode;
+import model.Res;
+import controllers.MouseToolListener;
+import controllers.Tool;
 
 public class PeriodeView extends JFrame implements Observer {
 	
@@ -31,6 +31,7 @@ public class PeriodeView extends JFrame implements Observer {
 	public PeriodeView() {
 		super("PeriodSnake");
 		
+		setIconImage(Res.getImage("periodSnakeIcon.png"));
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(800, 600);
