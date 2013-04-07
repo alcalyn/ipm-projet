@@ -11,7 +11,6 @@ import javax.swing.JFileChooser;
 
 public class FileManager {
 	
-	
 	public static File current_file = null;
 	
 	
@@ -39,6 +38,15 @@ public class FileManager {
 		oos.close();
 	}
 	
+	
+	public static void load(Periode periode) throws ClassNotFoundException, IOException {
+		JFileChooser chooser = new JFileChooser(".");
+		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			File file = chooser.getSelectedFile();
+			load(periode, file);
+			current_file = file;
+		}
+	}
 	
 	private static void load(Periode periode, File file) throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));

@@ -16,7 +16,9 @@ public class Control implements ActionListener {
 		SELECT_TOOL_SNAP = 5,
 		SELECT_TOOL_WRITE = 6,
 		SAVE = 7,
-		SAVE_AS = 8;
+		SAVE_AS = 8,
+		OPEN = 9,
+		QUIT = 10;
 	
 	
 	private static Periode periode;
@@ -32,7 +34,6 @@ public class Control implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(action);
 		switch (action) {
 			case SELECT_TOOL_SNAP:
 				periode_view.selectTool(Tool.SNAP);
@@ -40,6 +41,17 @@ public class Control implements ActionListener {
 				
 			case SELECT_TOOL_WRITE:
 				periode_view.selectTool(Tool.WRITE);
+				break;
+			
+			case OPEN:
+				try {
+					FileManager.load(periode);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				periode.flushCourbe();
 				break;
 			
 			case SAVE:
@@ -56,6 +68,10 @@ public class Control implements ActionListener {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+				break;
+			
+			case QUIT:
+				System.exit(0);
 				break;
 				
 			default:
