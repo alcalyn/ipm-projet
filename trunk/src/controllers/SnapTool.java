@@ -2,6 +2,8 @@ package controllers;
 
 import java.awt.event.MouseEvent;
 
+import model.ModelUpdate;
+
 import views.CourbePanel;
 
 public class SnapTool extends ToolAdapter {
@@ -28,7 +30,7 @@ public class SnapTool extends ToolAdapter {
 		int from = mouse_idx - affect_size / 2;
 		int to = mouse_idx + affect_size / 2;
 		
-		for(int i=from;i<to;i++) {
+		for(int i=Math.max(from, 0);i<Math.min(to, periode.sampling());i++) {
 			double dist = (double) Math.abs(i - mouse_idx) / (double) Math.abs(to - mouse_idx);
 			double local_force = force * (1 - dist);
 			
@@ -37,6 +39,8 @@ public class SnapTool extends ToolAdapter {
 			
 			periode.set(i, sample + diff * local_force);
 		}
+		
+		periode.notifyObservers(ModelUpdate.COURBE);
 	}
 	
 	
