@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.nio.ByteBuffer;
 
 public class Periode extends ObservablePeriode implements Serializable {
 	
@@ -149,18 +148,6 @@ public class Periode extends ObservablePeriode implements Serializable {
 	 */
 	public void flushCourbe() {
 		notifyObservers(ModelUpdate.COURBE);
-	}
-	
-	
-	public ByteBuffer toByteBuffer() {
-		ByteBuffer buf = ByteBuffer.allocate(sampling * 2);
-    	
-    	for(int i=0;i<sampling;i++) {
-    		short s = get(i);
-    		buf.putShort(s);
-    	}
-    	
-    	return buf;
 	}
 	
 	
