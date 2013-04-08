@@ -151,12 +151,24 @@ public class Periode extends ObservablePeriode implements Serializable {
 	}
 	
 	
-	public void setSilenceMiddle() {
+	public void dessiner(Fonction fonction) {
 		for(int i=0;i<sampling;i++) {
-			set(i, 0);
+			double at = (double) i / sampling;
+			set(at, fonction.f(at));
 		}
 		
 		flushCourbe();
+	}
+	
+	
+	public void setSilenceMiddle() {
+		dessiner(new Fonction() {
+			
+			@Override
+			public double f(double x) {
+				return 0;
+			}
+		});
 	}
 	
 	public void setNoise() {
@@ -173,12 +185,13 @@ public class Periode extends ObservablePeriode implements Serializable {
 	}
 	
 	public void setSin() {
-		for(int i=0;i<sampling;i++) {
-			double v = Math.sin(((double) i / (double) sampling) * (Math.PI * 2));
-			set(i, v);
-		}
-		
-		flushCourbe();
+		dessiner(new Fonction() {
+			
+			@Override
+			public double f(double x) {
+				return Math.sin(x * (Math.PI * 2));
+			}
+		});
 	}
 	
 	
