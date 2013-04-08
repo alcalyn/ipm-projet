@@ -26,9 +26,9 @@ public class Appli {
 		
 		view.observe(periode);
 		
+		 
 		
-		
-		periode.setNoise();
+		periode.setSin();
 		periode.duree(1.0 / 300.0);
 		view.selectTool(Tool.SNAP);
 		PeriodeReader.prepare(periode);
