@@ -33,7 +33,7 @@ public class WriteTool extends ToolAdapter {
 		
 		value = -value * 2 + 1;
 		
-		for(int i=s0;i<s1;i++)
+		for(int i=Math.max(s0, 0);i<Math.min(s1, periode.sampling());i++)
 			periode.set(i, value);
 		
 		
