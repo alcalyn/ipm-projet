@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -8,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.Border;
 
+import model.FonctionNamed;
+import model.Fonctions;
 import model.Res;
 import controllers.Control;
 
@@ -64,6 +67,13 @@ public class TabbedTools extends JPanel {
 		fonctions = createPanel();
 		
 		JPanel core_functions = createGroup("Fonctions standard");
+		ArrayList<FonctionNamed> fs = Fonctions.getCoreFunctions();
+		for (FonctionNamed f : fs) {
+			JButton button = createButton(f.name(), -1, null);
+			button.addActionListener(new Control(Control.SET_FONCTION, f.fonction()));
+			button.setIcon(f.createIcon(dim_icon.width, dim_icon.height));
+			core_functions.add(button);
+		}
 		fonctions.add(core_functions);
 		
 		JPanel perso_functions = createGroup("Fonctions personnelles");
@@ -94,17 +104,15 @@ public class TabbedTools extends JPanel {
 	
 	
 	private JButton createButton(String text, int control, String res) {
-		JButton b = null;
+		JButton b = new JButton();
 		
-		if(res == null) {
-			b = new JButton(text);
-		} else {
-			b = new JButton(Res.getIcon(res, dim_icon));
-			b.setToolTipText(text);
+		if(res != null) {
+			b.setIcon(Res.getIcon(res, dim_icon));
 		}
 		
+		b.setToolTipText(text);
 		b.setPreferredSize(dim_button);
-		b.addActionListener(new Control(control));
+		if(control >= 0) b.addActionListener(new Control(control));
 		return b;
 	}
 	

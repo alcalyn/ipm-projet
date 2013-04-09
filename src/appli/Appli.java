@@ -1,10 +1,11 @@
 package appli;
 
-import controllers.Control;
-import controllers.Tool;
+import model.Fonctions;
 import model.Periode;
 import model.PeriodeReader;
 import views.PeriodeView;
+import controllers.Control;
+import controllers.Tool;
 
 
 public class Appli {
@@ -26,9 +27,8 @@ public class Appli {
 		
 		view.observe(periode);
 		
-		 
 		
-		periode.setSin();
+		periode.dessiner(Fonctions.bruit());
 		periode.duree(1.0 / 300.0);
 		view.selectTool(Tool.SNAP);
 		PeriodeReader.prepare(periode);
