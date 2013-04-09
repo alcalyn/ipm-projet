@@ -20,7 +20,6 @@ public class PeriodeView extends JFrame implements Observer {
 	
 	private Menu menu;
 	private JPanel center;
-	//private ToolBar toolbar;
 	private CourbePanel panel_courbe;
 	private TabbedTools tabbed_tools;
 	
@@ -39,7 +38,6 @@ public class PeriodeView extends JFrame implements Observer {
 		
 		menu = new Menu();	
 		center = new JPanel(new BorderLayout());
-		//toolbar = new ToolBar();
 		panel_courbe = new CourbePanel();
 		tabbed_tools = new TabbedTools();
 		
@@ -51,7 +49,6 @@ public class PeriodeView extends JFrame implements Observer {
 		
 		add(menu, BorderLayout.NORTH);
 		center.add(panel_courbe, BorderLayout.CENTER);
-		//center.add(toolbar, BorderLayout.NORTH);
 		add(center, BorderLayout.CENTER);
 		add(tabbed_tools, BorderLayout.SOUTH);
 		

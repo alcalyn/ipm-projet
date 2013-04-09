@@ -14,6 +14,7 @@ import model.FonctionNamed;
 import model.Fonctions;
 import model.Res;
 import controllers.Control;
+import controllers.Tool;
 
 public class TabbedTools extends JPanel {
 	
@@ -77,8 +78,9 @@ public class TabbedTools extends JPanel {
 		edition = createPanel();
 		
 		JPanel outils = createGroup("Outils");
-		outils.add(createButton("Serpent", Control.SELECT_TOOL_SNAP, "periodSnakeIcon.png"));
-		outils.add(createButton("Plume", Control.SELECT_TOOL_WRITE, "plume.png"));
+		outils.add(createButton("Serpent", Control.SELECT_TOOL, Tool.SNAP, "periodSnakeIcon.png"));
+		outils.add(createButton("Plume", Control.SELECT_TOOL, Tool.WRITE, "plume.png"));
+		outils.add(createButton("Chut", Control.SELECT_TOOL, Tool.CHUT, "gomme.png"));
 		edition.add(outils);
 		
 		tabs.addTab("Edition", null, edition, "Edition de la periode en temps reel");
@@ -143,6 +145,19 @@ public class TabbedTools extends JPanel {
 		b.setToolTipText(text);
 		b.setPreferredSize(dim_button);
 		if(control >= 0) b.addActionListener(new Control(control));
+		return b;
+	}
+	
+	private JButton createButton(String text, int control, Object arg, String res) {
+		JButton b = new JButton();
+		
+		if(res != null) {
+			b.setIcon(Res.getIcon(res, dim_icon));
+		}
+		
+		b.setToolTipText(text);
+		b.setPreferredSize(dim_button);
+		if(control >= 0) b.addActionListener(new Control(control, arg));
 		return b;
 	}
 	
