@@ -45,13 +45,14 @@ public class TabbedTools extends JPanel {
 		periode = createPanel();
 		
 		JPanel fichier = createGroup("Fichier");
-		fichier.add(createButton("Nouvelle Periode", Control.NOUVEAU, "newFile.png"));
+		fichier.add(createButton("Nouvelle periode", Control.NOUVEAU, "newFile.png"));
+		fichier.add(createButton("Ouvrir une periode", Control.OPEN, "open.png"));
 		fichier.add(createButton("Enregistrer", Control.SAVE, "save.png"));
 		periode.add(fichier);
 		
 		JPanel lecture = createGroup("Lecture");
 		lecture.add(createButton("Lire", Control.PLAY, "play.png"));
-		lecture.add(createButton("Arreter", Control.STOP, "pause.jpg"));
+		lecture.add(createButton("Arreter", Control.STOP, "pause.png"));
 		periode.add(lecture);
 		
 		JPanel outils = createGroup("Outils");
@@ -83,6 +84,7 @@ public class TabbedTools extends JPanel {
 			button.setIcon(f.createIcon(dim_icon.width, dim_icon.height));
 			perso_functions.add(button);
 		}
+		perso_functions.add(createButton("Ajouter une fonction", Control.ADD_FUNCTION, "add.png"));
 		fonctions.add(perso_functions);
 		
 		tabs.addTab("Fonctions", null, fonctions, "Dessiner une fonction");

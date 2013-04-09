@@ -28,7 +28,7 @@ public class Appli {
 		view.observe(periode);
 		
 		
-		periode.dessiner(Fonctions.bruit());
+		periode.dessiner(Fonctions.silence());
 		periode.duree(1.0 / 300.0);
 		view.selectTool(Tool.SNAP);
 		PeriodeReader.prepare(periode);

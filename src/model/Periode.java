@@ -161,15 +161,6 @@ public class Periode extends ObservablePeriode implements Serializable {
 	}
 	
 	
-	public void setSilenceMiddle() {
-		dessiner(new Fonction() {
-			
-			public double f(double x) {
-				return 0;
-			}
-		});
-	}
-	
 	public void setNoise() {
 		double l1 = 0.003;
 		double l2 = 0.03;
@@ -194,7 +185,7 @@ public class Periode extends ObservablePeriode implements Serializable {
 	
 	
 	public void reinit() {
-		setSilenceMiddle();
+		dessiner(Fonctions.silence());
 		duree = 1.0 / 440.0;
 		flushCourbe();
 	}
