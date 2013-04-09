@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -12,15 +13,13 @@ import javax.swing.ImageIcon;
 public class Res {
 	
 	
-	private static final String res_base = "res"+File.separator;
 	
-	private static String path(String res) {
-		return res_base+res;
+	private static URL getRes(String res) {
+		return new Res().getClass().getResource("/"+res);
 	}
 	
-	
-	public static File getFile(String ressource_name) {
-		return new File(path(ressource_name));
+	public static File getFile(String r) {
+		return new File(r);
 	}
 	
 	public static String getFileContent(String r) {
@@ -29,7 +28,7 @@ public class Res {
 	
 	private static String readFile(String filename) {
 	   String content = null;
-	   File file = new File(filename); //for ex foo.txt
+	   File file = getFile(filename);
 	   try {
 	       FileReader reader = new FileReader(file);
 	       char[] chars = new char[(int) file.length()];
@@ -43,16 +42,16 @@ public class Res {
 	}
 	
 	public static Image getImage(String res) {
-		ImageIcon img = new ImageIcon(path(res));
+		ImageIcon img = new ImageIcon(getRes(res));
 		return img.getImage();
 	}
 	
 	public static Icon getIcon(String res) {
-		return new ImageIcon(path(res));
+		return new ImageIcon(getRes(res));
 	}
 	
 	public static Icon getIcon(String res, Dimension dimension) {
-		return new ImageIcon(new ImageIcon(path(res)).getImage().getScaledInstance(dimension.width, dimension.height, Image.SCALE_SMOOTH));
+		return new ImageIcon(getImage(res).getScaledInstance(dimension.width, dimension.height, Image.SCALE_SMOOTH));
 	}
 	
 	
