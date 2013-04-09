@@ -33,7 +33,7 @@ public class Appli {
 		view.selectTool(Tool.SNAP);
 		PeriodeReader.prepare(periode);
 		
-		System.out.println("end");
+		//System.out.println("end");
 	}
 
 }
