@@ -28,7 +28,8 @@ public class Control implements ActionListener {
 		NOUVEAU = 13,
 		CHANGE_DUREE = 14,
 		CHANGE_FREQUENCE = 15,
-		SET_FONCTION = 16;
+		SET_FONCTION = 16,
+		ADD_FUNCTION = 17;
 	
 	
 	private static Periode periode;
@@ -147,6 +148,16 @@ public class Control implements ActionListener {
 			
 			case SET_FONCTION:
 				periode.dessiner((Fonction) args[0]);
+				break;
+			
+			case ADD_FUNCTION:
+				JOptionPane.showMessageDialog(
+						periode_view,
+						"Pour ajouter une courbe, il suffit d'ajouter une fonction\ndans la classe " +
+						"'PersonalFunctions' du package 'perso'.",
+						"Ajouter une fonction",
+						JOptionPane.INFORMATION_MESSAGE
+				);
 				break;
 				
 			default:
