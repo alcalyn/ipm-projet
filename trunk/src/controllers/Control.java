@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import views.PeriodeView;
 
 import model.FileManager;
+import model.Fonction;
 import model.Periode;
 import model.PeriodeReader;
 
@@ -26,7 +27,8 @@ public class Control implements ActionListener {
 		STOP = 12,
 		NOUVEAU = 13,
 		CHANGE_DUREE = 14,
-		CHANGE_FREQUENCE = 15;
+		CHANGE_FREQUENCE = 15,
+		SET_FONCTION = 16;
 	
 	
 	private static Periode periode;
@@ -34,10 +36,17 @@ public class Control implements ActionListener {
 
 
 	private int action;
+	private Object [] args;
 	
 
 	public Control(int action) {
 		this.action = action;
+		this.args = new Object[0];
+	}
+	
+	public Control(int action, Object ... args) {
+		this.action = action;
+		this.args = args;
 	}
 
 
@@ -134,6 +143,10 @@ public class Control implements ActionListener {
 					periode.duree(1.0 / d);
 				}
 				
+				break;
+			
+			case SET_FONCTION:
+				periode.dessiner((Fonction) args[0]);
 				break;
 				
 			default:

@@ -164,7 +164,6 @@ public class Periode extends ObservablePeriode implements Serializable {
 	public void setSilenceMiddle() {
 		dessiner(new Fonction() {
 			
-			@Override
 			public double f(double x) {
 				return 0;
 			}
@@ -187,7 +186,6 @@ public class Periode extends ObservablePeriode implements Serializable {
 	public void setSin() {
 		dessiner(new Fonction() {
 			
-			@Override
 			public double f(double x) {
 				return Math.sin(x * (Math.PI * 2));
 			}
