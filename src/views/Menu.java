@@ -28,10 +28,8 @@ public class Menu extends JMenuBar {
 	private JMenuItem			change_duree_hz;
 	
 	
-	private JMenu		affichage;
-	
-	
 	private JMenu		about;
+	private JMenuItem		du_projet;
 	
 	
 	public Menu() {
@@ -39,7 +37,6 @@ public class Menu extends JMenuBar {
 		
 		initFichier();
 		initPeriode();
-		initAffichage();
 		initAbout();
 	}
 	
@@ -93,14 +90,14 @@ public class Menu extends JMenuBar {
 		add(periode);
 	}
 	
-	private void initAffichage() {
-		affichage = new JMenu("Affichage");
-		
-		add(affichage);
-	}
-	
 	private void initAbout() {
 		about = new JMenu("?");
+		
+		du_projet = new JMenuItem("... du projet");
+		
+		du_projet.addActionListener(new Control(Control.DISPLAY_ABOUT_PROJECT));
+		
+		about.add(du_projet);
 		
 		add(about);
 	}

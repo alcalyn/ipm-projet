@@ -6,12 +6,12 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import views.PeriodeView;
-
 import model.FileManager;
 import model.Fonction;
 import model.Periode;
 import model.PeriodeReader;
+import views.About;
+import views.PeriodeView;
 
 public class Control implements ActionListener {
 	
@@ -29,7 +29,8 @@ public class Control implements ActionListener {
 		CHANGE_DUREE = 14,
 		CHANGE_FREQUENCE = 15,
 		SET_FONCTION = 16,
-		ADD_FUNCTION = 17;
+		ADD_FUNCTION = 17,
+		DISPLAY_ABOUT_PROJECT = 18;
 	
 	
 	private static Periode periode;
@@ -162,6 +163,10 @@ public class Control implements ActionListener {
 						"Ajouter une fonction",
 						JOptionPane.INFORMATION_MESSAGE
 				);
+				break;
+			
+			case DISPLAY_ABOUT_PROJECT:
+				new About();
 				break;
 				
 			default:
