@@ -3,14 +3,9 @@ package model;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.net.URLDecoder;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -20,12 +15,10 @@ public class Res {
 	
 	
 	private static URL getRes(String res) {
-		System.out.println(new Res().getClass().getResource("/"+res));
 		return new Res().getClass().getResource("/"+res);
 	}
 	
 	private static InputStream getResStream(String res) {
-		System.out.println(new Res().getClass().getResource("/"+res));
 		return new Res().getClass().getResourceAsStream("/"+res);
 	}
 	
