@@ -5,7 +5,9 @@ import java.awt.Image;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -19,19 +21,24 @@ public class Res {
 	}
 	
 	public static File getFile(String r) {
-		return new File(r);
+		try {
+			return new File(URLDecoder.decode(getRes(r).getFile(), "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	public static String getFileContent(String r) {
-		return readFile(Res.getFile(r).getAbsolutePath());
+		return readFile(Res.getFile(r));
 	}
 	
-	private static String readFile(String filename) {
+	private static String readFile(File f) {
 	   String content = null;
-	   File file = getFile(filename);
 	   try {
-	       FileReader reader = new FileReader(file);
-	       char[] chars = new char[(int) file.length()];
+	       FileReader reader = new FileReader(f);
+	       char[] chars = new char[(int) f.length()];
 	       reader.read(chars);
 	       content = new String(chars);
 	       reader.close();
