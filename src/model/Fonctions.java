@@ -46,13 +46,18 @@ public class Fonctions {
 				continue;
 			}
 			
+			ret += Character.toLowerCase(c);
+			
+			
 			if(next != 0 && Character.isUpperCase(next)) {
-				ret += c;
 				ret += ' ';
 				continue;
 			}
 			
-			ret += Character.toLowerCase(c);
+			if(!Character.isDigit(c) && Character.isDigit(next)) {
+				ret += ' ';
+				continue;
+			}
 		}
 		
 		return ret;
