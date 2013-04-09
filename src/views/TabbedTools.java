@@ -29,6 +29,7 @@ public class TabbedTools extends JPanel {
 	private JTabbedPane tabs;
 	
 	private JPanel periode;
+	private JPanel edition;
 	private JPanel fonctions;
 	
 	
@@ -47,6 +48,7 @@ public class TabbedTools extends JPanel {
 		addComponentListener(ca);
 		
 		initPeriode();
+		initEdition();
 		initFonctions();
 		
 		add(tabs);
@@ -68,12 +70,18 @@ public class TabbedTools extends JPanel {
 		lecture.add(new DureeSlider());
 		periode.add(lecture);
 		
+		tabs.addTab("Periode", null, periode, "Parametres de la periode");
+	}
+	
+	private void initEdition() {
+		edition = createPanel();
+		
 		JPanel outils = createGroup("Outils");
 		outils.add(createButton("Serpent", Control.SELECT_TOOL_SNAP, "periodSnakeIcon.png"));
 		outils.add(createButton("Plume", Control.SELECT_TOOL_WRITE, "plume.png"));
-		periode.add(outils);
+		edition.add(outils);
 		
-		tabs.addTab("Periode", null, periode, "Parametres de la periode");
+		tabs.addTab("Edition", null, edition, "Edition de la periode en temps reel");
 	}
 	
 	private void initFonctions() {

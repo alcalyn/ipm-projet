@@ -35,17 +35,23 @@ public class SnapTool extends ToolAdapter {
 		int from = mouse_idx - affect_size / 2;
 		int to = mouse_idx + affect_size / 2;
 		
-		for(int i=Math.max(from, 0);i<Math.min(to, periode.sampling());i++) {
+		for(int i=from;i<to;i++) {
 			double dist = (double) Math.abs(i - mouse_idx) / (double) Math.abs(to - mouse_idx);
 			double local_force = force * (1 - dist);
 			
-			double sample = (double) periode.get(i) / (double) Short.MAX_VALUE;
+			double sample = (double) periode.get(mod(i, periode.sampling())) / (double) Short.MAX_VALUE;
 			double diff = mouse_y - sample;
 			
-			periode.set(i, sample + diff * local_force);
+			periode.set(mod(i, periode.sampling()), sample + diff * local_force);
 		}
 		
 		periode.flushCourbe();
+	}
+	
+	private static int mod(int n, int mod) {
+		int r = n % mod;
+		if(r < 0) r += mod;
+		return r;
 	}
 	
 	
