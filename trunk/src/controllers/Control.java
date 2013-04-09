@@ -68,8 +68,10 @@ public class Control implements ActionListener {
 					FileManager.load(periode);
 				} catch (IOException e1) {
 					e1.printStackTrace();
+					error("Le fichier n'a pas pu être chargé");
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
+					error("Le fichier n'a pas pu être chargé");
 				}
 				periode.flushCourbe();
 				break;
@@ -79,6 +81,7 @@ public class Control implements ActionListener {
 					FileManager.save(periode);
 				} catch (IOException e1) {
 					e1.printStackTrace();
+					error("Le fichier n'a pas pu être sauvegardé");
 				}
 				break;
 			
@@ -87,6 +90,7 @@ public class Control implements ActionListener {
 					FileManager.saveAs(periode);
 				} catch (IOException e1) {
 					e1.printStackTrace();
+					error("Le fichier n'a pas pu être sauvegardé");
 				}
 				break;
 			
@@ -166,22 +170,34 @@ public class Control implements ActionListener {
 	}
 	
 	
-	public static Periode getPeriode() {
-		return periode;
+	public static PeriodeView getPeriode_view() {
+		return periode_view;
 	}
 
+	public static void setPeriodeView(PeriodeView periode_view) {
+		Control.periode_view = periode_view;
+	}
 
 	public static void setPeriode(Periode periode) {
 		Control.periode = periode;
 	}
+
+	public static void error(String msg) {
+		JOptionPane.showMessageDialog(
+				periode_view,
+				msg,
+				"Oups...",
+				JOptionPane.ERROR_MESSAGE
+		);
+	}
+	
+	
+	public static Periode getPeriode() {
+		return periode;
+	}
 	
 	public static PeriodeView getPeriodeView() {
 		return periode_view;
-	}
-
-
-	public static void setPeriodeView(PeriodeView periode_view) {
-		Control.periode_view = periode_view;
 	}
 	
 }

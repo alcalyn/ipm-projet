@@ -52,7 +52,7 @@ public class CourbePanel extends JPanel implements Observer {
 	
 	
 	private void drawCourbe(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(new Color(0x006600));
 		for(int i=1;i<periode.sampling();i++) {
 			Point a = new Point(
 					((i - 1) * getWidth()) / periode.sampling(),
