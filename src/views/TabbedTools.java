@@ -7,7 +7,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.border.Border;
 
 import model.FonctionNamed;
 import model.Fonctions;
@@ -77,6 +76,13 @@ public class TabbedTools extends JPanel {
 		fonctions.add(core_functions);
 		
 		JPanel perso_functions = createGroup("Fonctions personnelles");
+		fs = Fonctions.getPersonalFunctions();
+		for (FonctionNamed f : fs) {
+			JButton button = createButton(f.name(), -1, null);
+			button.addActionListener(new Control(Control.SET_FONCTION, f.fonction()));
+			button.setIcon(f.createIcon(dim_icon.width, dim_icon.height));
+			perso_functions.add(button);
+		}
 		fonctions.add(perso_functions);
 		
 		tabs.addTab("Fonctions", null, fonctions, "Dessiner une fonction");
