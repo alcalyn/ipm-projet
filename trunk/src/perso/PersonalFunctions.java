@@ -36,7 +36,7 @@ public class PersonalFunctions {
 		return new Fonction() {
 			
 			public double f(double x) {
-				return x - 0.5;
+				return Math.sin(x * Math.PI * 2 * 4) * 0.2 + Math.sin(x * Math.PI * 2 * 6) * 0.8;
 			}
 		};
 	}
