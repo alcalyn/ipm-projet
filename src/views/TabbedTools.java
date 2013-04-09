@@ -1,6 +1,8 @@
 package views;
 
 import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -18,7 +20,8 @@ public class TabbedTools extends JPanel {
 	private static final long serialVersionUID = 2505664005430624227L;
 	
 	
-	private static final Dimension dim_tab = new Dimension(750, 120);
+	private static final int dim_tab_height = 120;
+	private static final int dim_tab_padding = 8;
 	private static final Dimension dim_button = new Dimension(40, 40);
 	private static final Dimension dim_icon = new Dimension(32, 32);
 	
@@ -33,6 +36,15 @@ public class TabbedTools extends JPanel {
 		super();
 		
 		tabs = new JTabbedPane();
+		
+		ComponentAdapter ca = new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				Dimension d = new Dimension(getWidth() - dim_tab_padding, dim_tab_height - dim_tab_padding);
+				tabs.setPreferredSize(d);
+			}
+		};
+		
+		addComponentListener(ca);
 		
 		initPeriode();
 		initFonctions();
@@ -53,6 +65,7 @@ public class TabbedTools extends JPanel {
 		JPanel lecture = createGroup("Lecture");
 		lecture.add(createButton("Lire", Control.PLAY, "play.png"));
 		lecture.add(createButton("Arreter", Control.STOP, "pause.png"));
+		lecture.add(new DureeSlider());
 		periode.add(lecture);
 		
 		JPanel outils = createGroup("Outils");
@@ -97,7 +110,8 @@ public class TabbedTools extends JPanel {
 	private JPanel createPanel() {
 		JPanel panel = new JPanel();
 		
-		panel.setPreferredSize(dim_tab);
+		Dimension d = new Dimension(784 - dim_tab_padding, dim_tab_height - dim_tab_padding);
+		tabs.setPreferredSize(d);
 		
 		return panel;
 	}
