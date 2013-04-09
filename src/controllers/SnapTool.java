@@ -25,7 +25,7 @@ public class SnapTool extends ToolAdapter {
 	}
 	
 	
-	private void snap(int x, int y) {
+	public void snap(int x, int y) {
 		double force = 0.200;
 		
 		int affect_size = (int) (periode.sampling() * force);

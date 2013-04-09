@@ -17,8 +17,6 @@ public class Control implements ActionListener {
 	
 	
 	public static final int
-		SELECT_TOOL_SNAP = 5,
-		SELECT_TOOL_WRITE = 6,
 		SAVE = 7,
 		SAVE_AS = 8,
 		OPEN = 9,
@@ -30,7 +28,8 @@ public class Control implements ActionListener {
 		CHANGE_FREQUENCE = 15,
 		SET_FONCTION = 16,
 		ADD_FUNCTION = 17,
-		DISPLAY_ABOUT_PROJECT = 18;
+		DISPLAY_ABOUT_PROJECT = 18,
+		SELECT_TOOL = 19;
 	
 	
 	private static Periode periode;
@@ -56,12 +55,8 @@ public class Control implements ActionListener {
 		String s;
 		
 		switch (action) {
-			case SELECT_TOOL_SNAP:
-				periode_view.selectTool(Tool.SNAP);
-				break;
-				
-			case SELECT_TOOL_WRITE:
-				periode_view.selectTool(Tool.WRITE);
+			case SELECT_TOOL:
+				periode_view.selectTool((Integer) args[0]);
 				break;
 			
 			case OPEN:

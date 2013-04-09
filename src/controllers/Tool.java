@@ -14,7 +14,8 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 	
 	public static final int
 		SNAP = 5,
-		WRITE = 6;
+		WRITE = 6,
+		CHUT = 7;
 	
 	
 	private static HashMap<Integer, Tool> singletons = new HashMap<Integer, Tool>();
@@ -41,6 +42,10 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 			
 			case WRITE:
 				singletons.put(tool, new WriteTool(courbe_panel));
+				break;
+			
+			case CHUT:
+				singletons.put(tool, new ChutTool(courbe_panel));
 				break;
 	
 			default:
