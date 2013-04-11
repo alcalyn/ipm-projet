@@ -12,6 +12,7 @@ import javax.swing.JTabbedPane;
 
 import model.FonctionNamed;
 import model.Fonctions;
+import model.ModulationNamed;
 import model.Res;
 import controllers.Control;
 import controllers.Tool;
@@ -82,6 +83,25 @@ public class TabbedTools extends JPanel {
 		outils.add(createButton("Plume", Control.SELECT_TOOL, Tool.WRITE, "plume.png"));
 		outils.add(createButton("Chut", Control.SELECT_TOOL, Tool.CHUT, "gomme.png"));
 		edition.add(outils);
+		
+		JPanel core_modulation = createGroup("Modulations standard");
+		for (ModulationNamed f : Fonctions.getCoreModulations()) {
+			JButton button = createButton(f.name(), -1, null);
+			button.addActionListener(new Control(Control.MODULER, f.modulation()));
+			button.setIcon(f.createIcon(dim_icon.width, dim_icon.height));
+			core_modulation.add(button);
+		}
+		edition.add(core_modulation);
+		
+		JPanel perso_modulation = createGroup("Modulations personnelles");
+		for (ModulationNamed f : Fonctions.getPersonalModulations()) {
+			JButton button = createButton(f.name(), -1, null);
+			button.addActionListener(new Control(Control.MODULER, f.modulation()));
+			button.setIcon(f.createIcon(dim_icon.width, dim_icon.height));
+			perso_modulation.add(button);
+		}
+		perso_modulation.add(createButton("Ajouter une modulation", Control.ADD_MODULATION, "add.png"));
+		edition.add(perso_modulation);
 		
 		tabs.addTab("Edition", null, edition, "Edition de la periode en temps reel");
 	}

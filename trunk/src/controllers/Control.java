@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import appli.Modulation;
+
 import model.FileManager;
 import model.Fonction;
 import model.Periode;
@@ -29,7 +31,9 @@ public class Control implements ActionListener {
 		SET_FONCTION = 16,
 		ADD_FUNCTION = 17,
 		DISPLAY_ABOUT_PROJECT = 18,
-		SELECT_TOOL = 19;
+		SELECT_TOOL = 19,
+		MODULER = 20,
+		ADD_MODULATION = 21;
 	
 	
 	private static Periode periode;
@@ -156,6 +160,20 @@ public class Control implements ActionListener {
 						"Pour ajouter une courbe, il suffit d'ajouter une fonction\ndans la classe " +
 						"'PersonalFunctions' du package 'perso'.",
 						"Ajouter une fonction",
+						JOptionPane.INFORMATION_MESSAGE
+				);
+				break;
+			
+			case MODULER:
+				periode.moduler((Modulation) args[0]);
+				break;
+			
+			case ADD_MODULATION:
+				JOptionPane.showMessageDialog(
+						periode_view,
+						"Pour ajouter une modulation, il suffit d'ajouter une fonction\ndans la classe " +
+						"'PersonalModulations' du package 'perso'.",
+						"Ajouter une modulation",
 						JOptionPane.INFORMATION_MESSAGE
 				);
 				break;
