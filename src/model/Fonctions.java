@@ -3,8 +3,6 @@ package model;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import appli.CoreModulations;
-import appli.Modulation;
 
 import perso.PersonalFunctions;
 import perso.PersonalModulations;

@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 
-import appli.Modulation;
 
 public class Periode extends ObservablePeriode implements Fonction, Serializable {
 	

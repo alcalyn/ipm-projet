@@ -1,6 +1,5 @@
-package appli;
+package model;
 
-import model.Fonction;
 
 public interface Modulation {
 	

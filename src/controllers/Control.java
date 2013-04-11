@@ -6,10 +6,10 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import appli.Modulation;
 
 import model.FileManager;
 import model.Fonction;
+import model.Modulation;
 import model.Periode;
 import model.PeriodeReader;
 import views.About;

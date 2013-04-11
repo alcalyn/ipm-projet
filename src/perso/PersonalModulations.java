@@ -1,7 +1,7 @@
 package perso;
 
 import model.Fonction;
-import appli.Modulation;
+import model.Modulation;
 
 public class PersonalModulations {
 	
