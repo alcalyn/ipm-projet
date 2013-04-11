@@ -26,6 +26,7 @@ public class Menu extends JMenuBar {
 	private JMenu			change_duree;
 	private JMenuItem			change_duree_sec;
 	private JMenuItem			change_duree_hz;
+	private JMenuItem		resample;
 	
 	
 	private JMenu		about;
@@ -74,11 +75,13 @@ public class Menu extends JMenuBar {
 		change_duree = new JMenu("Modifier duree");
 		change_duree_sec = new JMenuItem("Saisir un temps");
 		change_duree_hz = new JMenuItem("Saisir une frequence (1/t)");
+		resample = new JMenuItem("Rééchantillonnage de la courbe");
 		
 		lire.addActionListener(new Control(Control.PLAY));
 		stopper.addActionListener(new Control(Control.STOP));
 		change_duree_sec.addActionListener(new Control(Control.CHANGE_DUREE));
 		change_duree_hz.addActionListener(new Control(Control.CHANGE_FREQUENCE));
+		resample.addActionListener(new Control(Control.RESAMPLE));
 		
 		periode.add(lire);
 		periode.add(stopper);
@@ -86,6 +89,7 @@ public class Menu extends JMenuBar {
 		change_duree.add(change_duree_sec);
 		change_duree.add(change_duree_hz);
 		periode.add(change_duree);
+		periode.add(resample);
 		
 		add(periode);
 	}

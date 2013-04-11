@@ -75,10 +75,14 @@ public class CourbePanel extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		Periode periode = (Periode) o;
 		ModelUpdate up = (ModelUpdate) arg;
+		if(this.periode == null) this.periode = periode;
 		
 		switch(up.type) {
 			case ModelUpdate.COURBE:
-				if(this.periode == null) this.periode = periode;
+				repaint();
+				break;
+			
+			case ModelUpdate.SAMPLING:
 				repaint();
 				break;
 		}

@@ -32,9 +32,15 @@ public class Periode extends ObservablePeriode implements Fonction, Serializable
 		return sampling;
 	}
 
-	public void sampling(int sampling) {
-		this.sampling = sampling;
-		notifyObservers(ModelUpdate.SAMPLING, sampling);
+	public void sampling(int s) {
+		short [] resample = new short[s];
+		for(int i=0;i<s;i++) {
+			resample[i] = get((double) i / (double) s);
+		}
+		
+		this.courbe = resample;
+		this.sampling = s;
+		notifyObservers(ModelUpdate.SAMPLING, s);
 	}
 	
 	public short [] getCourbe() {
@@ -55,7 +61,7 @@ public class Periode extends ObservablePeriode implements Fonction, Serializable
 	/**
 	 * 
 	 * @param valeur dans [0;1[
-	 * @return le valeur de la courbe a ce point
+	 * @return la valeur de la courbe a ce point
 	 */
 	public short get(double at) {
 		double continu = (double) ((double) at % 1.0) * (double) sampling;
@@ -70,7 +76,7 @@ public class Periode extends ObservablePeriode implements Fonction, Serializable
 		double coef1 = continu - discret0;
 		double p0 = courbe[discret0] * coef0;
 		double p1 = courbe[discret1 % sampling] * coef1;
-		sample = (short) ((p0 + p1) / 2);
+		sample = (short) (p0 + p1);
 		
 		return sample;
 	}
