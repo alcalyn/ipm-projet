@@ -1,5 +1,6 @@
 package appli;
 
+import model.CoreFunctions;
 import model.Fonctions;
 import model.Periode;
 import model.PeriodeReader;
@@ -28,7 +29,7 @@ public class Appli {
 		view.observe(periode);
 		
 		
-		periode.dessiner(Fonctions.silence());
+		periode.dessiner(CoreFunctions.silence());
 		periode.duree(1.0 / 300.0);
 		view.selectTool(Tool.SNAP);
 		PeriodeReader.prepare(periode);

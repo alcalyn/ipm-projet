@@ -185,7 +185,7 @@ public class Periode extends ObservablePeriode implements Serializable {
 	
 	
 	public void reinit() {
-		dessiner(Fonctions.silence());
+		dessiner(CoreFunctions.silence());
 		duree = 1.0 / 440.0;
 		flushCourbe();
 	}
