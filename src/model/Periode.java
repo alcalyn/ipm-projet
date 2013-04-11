@@ -144,7 +144,7 @@ public class Periode extends ObservablePeriode implements Fonction, Serializable
 		if(_value < -1) _value = -1;
 		if(_value > 1) _value = 1;
 		
-		int index = (int) ((double) sampling * at);
+		int index = (int) Math.round((double) sampling * at);
 		
 		courbe[index] = (short) (_value * Short.MAX_VALUE);
 	}
@@ -160,7 +160,7 @@ public class Periode extends ObservablePeriode implements Fonction, Serializable
 	
 	public void dessiner(Fonction fonction) {
 		for(int i=0;i<sampling;i++) {
-			double at = (double) i / sampling;
+			double at = (double) i / (double) sampling;
 			set(at, fonction.f(at));
 		}
 		
@@ -169,7 +169,7 @@ public class Periode extends ObservablePeriode implements Fonction, Serializable
 	
 	public void moduler(Modulation modulation) {
 		for(int i=0;i<sampling;i++) {
-			double at = (double) i / sampling;
+			double at = (double) i / (double) sampling;
 			set(at, modulation.f(at, this));
 		}
 		
