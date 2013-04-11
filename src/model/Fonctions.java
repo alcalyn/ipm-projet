@@ -3,7 +3,11 @@ package model;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import appli.CoreModulations;
+import appli.Modulation;
+
 import perso.PersonalFunctions;
+import perso.PersonalModulations;
 
 
 public class Fonctions {
@@ -28,6 +32,27 @@ public class Fonctions {
 		
 		return ret;
 	}
+	
+	public static ArrayList<ModulationNamed> getModulations(Class<?> classe) {
+		ArrayList<ModulationNamed> ret = new ArrayList<ModulationNamed>();
+		
+		for (Method method : classe.getMethods()) {
+			if(method.getReturnType().getSimpleName().equals("Modulation")) {
+				String name = plusBeau(method.getName());
+				Modulation f = null;
+				
+				try {
+					f = (Modulation) method.invoke(null, new Object[0]);
+					ret.add(new ModulationNamed(f, name));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return ret;
+	}
+	
 	
 	private static String plusBeau(String s) {
 		String ret = new String();
@@ -69,6 +94,14 @@ public class Fonctions {
 	
 	public static ArrayList<FonctionNamed> getPersonalFunctions() {
 		return getFonctions(PersonalFunctions.class);
+	}
+	
+	public static ArrayList<ModulationNamed> getCoreModulations() {
+		return getModulations(CoreModulations.class);
+	}
+	
+	public static ArrayList<ModulationNamed> getPersonalModulations() {
+		return getModulations(PersonalModulations.class);
 	}
 	
 }

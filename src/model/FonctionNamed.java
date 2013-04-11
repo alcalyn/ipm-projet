@@ -9,8 +9,8 @@ import javax.swing.Icon;
 
 public class FonctionNamed {
 	
-	private Fonction f;
-	private String name;
+	protected Fonction f;
+	protected String name;
 	
 	public FonctionNamed(Fonction f, String name) {
 		this.f = f;

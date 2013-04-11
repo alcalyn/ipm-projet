@@ -2,7 +2,9 @@ package model;
 
 import java.io.Serializable;
 
-public class Periode extends ObservablePeriode implements Serializable {
+import appli.Modulation;
+
+public class Periode extends ObservablePeriode implements Fonction, Serializable {
 	
 	private static final long serialVersionUID = 8648757381097933473L;
 	
@@ -83,7 +85,7 @@ public class Periode extends ObservablePeriode implements Serializable {
 	 */
 	public double getDouble(double at) {
 		double continu = (double) ((double) at % 1.0) * (double) sampling;
-		short sample;
+		double sample;
 		
 		int discret0 = (int) Math.floor(continu);
 		int discret1 = (int) Math.ceil(continu);
@@ -94,7 +96,7 @@ public class Periode extends ObservablePeriode implements Serializable {
 		double coef1 = continu - discret0;
 		double p0 = courbe[discret0] * coef0;
 		double p1 = courbe[discret1 % sampling] * coef1;
-		sample = (short) ((p0 + p1) / 2);
+		sample = (p0 + p1) / Short.MAX_VALUE;
 		
 		return sample;
 	}
@@ -160,6 +162,15 @@ public class Periode extends ObservablePeriode implements Serializable {
 		flushCourbe();
 	}
 	
+	public void moduler(Modulation modulation) {
+		for(int i=0;i<sampling;i++) {
+			double at = (double) i / sampling;
+			set(at, modulation.f(at, this));
+		}
+		
+		flushCourbe();
+	}
+	
 	
 	public void setNoise() {
 		double l1 = 0.003;
@@ -194,6 +205,11 @@ public class Periode extends ObservablePeriode implements Serializable {
 		this.sampling = p.sampling;
 		this.duree = p.duree;
 		this.courbe = p.courbe;
+	}
+
+	@Override
+	public double f(double x) {
+		return getDouble(x);
 	}
 	
 	
