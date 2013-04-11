@@ -1,12 +1,5 @@
 package model;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Polygon;
-
-import javax.swing.Icon;
-
 
 public class ModulationNamed extends FonctionNamed {
 	

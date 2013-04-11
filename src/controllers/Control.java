@@ -3,6 +3,7 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
 
@@ -33,7 +34,8 @@ public class Control implements ActionListener {
 		DISPLAY_ABOUT_PROJECT = 18,
 		SELECT_TOOL = 19,
 		MODULER = 20,
-		ADD_MODULATION = 21;
+		ADD_MODULATION = 21,
+		RESAMPLE = 22;
 	
 	
 	private static Periode periode;
@@ -180,6 +182,34 @@ public class Control implements ActionListener {
 			
 			case DISPLAY_ABOUT_PROJECT:
 				new About();
+				break;
+			
+			case RESAMPLE:
+				double d = periode.duree();
+				DecimalFormat df = new DecimalFormat();
+				df.setMaximumFractionDigits(2);
+				String ds;
+				if(d < 1) {
+					ds = df.format(1/d) + "hz";
+				} else {
+					ds = df.format(Math.round(d))+"sec";
+				}
+				
+				int c = (int) (2 * PeriodeReader.SAMPLES_RATE * periode.duree());
+				s = (String) JOptionPane.showInputDialog(
+						periode_view,
+						"Nouveau nombre de points dans la courbe (Conseillé pour "+ds+" : "+c+")",
+						"Rééchantillonnage",
+						JOptionPane.INFORMATION_MESSAGE,
+						null,
+						null,
+						Integer.toString(periode.sampling())
+				);
+				
+				if(s != null) {
+					periode.sampling(Integer.parseInt(s));
+				}
+				
 				break;
 				
 			default:
