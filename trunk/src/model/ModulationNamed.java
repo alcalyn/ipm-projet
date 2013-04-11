@@ -7,7 +7,6 @@ import java.awt.Polygon;
 
 import javax.swing.Icon;
 
-import appli.Modulation;
 
 public class ModulationNamed extends FonctionNamed {
 	
