@@ -3,10 +3,10 @@ package controllers;
 public class Brush {
 	
 	
-	private Object [] args;
+	private String [] args;
 	
 	
-	public Brush(Object ... args) {
+	public Brush(String ... args) {
 		this.args = args;
 	}
 	
@@ -16,25 +16,28 @@ public class Brush {
 	}
 	
 	
-	public Object get(int n) {
+	public String get(int n) {
 		return args[n];
 	}
 	
-	public void set(int n, Object value) {
+	public void set(int n, String value) {
 		args[n] = value;
 	}
 	
 	
 	public int getInt(int n) {
-		return (Integer) get(n);
+		if(get(n).length() == 0) return 0;
+		return Integer.parseInt(get(n));
 	}
 	
 	public double getDouble(int n) {
-		return (Double) get(n);
+		if(get(n).length() == 0) return 0.0;
+		return Double.parseDouble(get(n));
 	}
 	
 	public boolean getBoolean(int n) {
-		return (Boolean) get(n);
+		if(get(n).length() == 0) return false;
+		return Boolean.parseBoolean(get(n));
 	}
 	
 	

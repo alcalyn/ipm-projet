@@ -8,25 +8,33 @@ import views.CourbePanel;
 public class ChutTool extends ToolAdapter {
 	
 	
-	private SnapTool snap_tool;
 
 	public ChutTool(CourbePanel courbe_panel) {
 		super(courbe_panel);
-		snap_tool = (SnapTool) Tool.getTool(Tool.SNAP, courbe_panel);
+		brush = new Brush("0.200", "1.0", "0.0");
+	}
+	
+	@Override
+	public String[] getBrushParams() {
+		return new String [] {
+				"Taille",
+				"Force",
+				"Origine",
+		};
 	}
 	
 	
+	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(periode != null) {
-			snap_tool.snap(e.getX(), ((Component) e.getSource()).getHeight()/2);
+			int origine = (int) ((- brush.getDouble(2) / 2.0 + 0.5) * ((Component) e.getSource()).getHeight());
+			SnapTool.snap(e.getX(), origine, brush, courbe_panel);
 		}
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(periode != null) {
-			snap_tool.snap(e.getX(), ((Component) e.getSource()).getHeight()/2);
-		}
+		mouseDragged(e);
 	}
 
 
