@@ -38,6 +38,11 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 		return brush;
 	}
 	
+	
+	public String [] getBrushParams() {
+		return new String[0];
+	}
+	
 	public abstract String getName();
 	
 	
@@ -49,7 +54,7 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 				break;
 			
 			case WRITE:
-				singletons.put(tool, new WriteTool(courbe_panel, 4));
+				singletons.put(tool, new WriteTool(courbe_panel));
 				break;
 			
 			case CHUT:
@@ -68,6 +73,13 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 	
 	public static void setPeriode(Periode periode) {
 		Tool.periode = periode;
+	}
+	
+	
+	public static int mod(int s) {
+		int mod = s % periode.sampling();
+		if(mod < 0) mod += periode.sampling();
+		return mod;
 	}
 	
 
