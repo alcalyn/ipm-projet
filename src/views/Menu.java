@@ -29,6 +29,10 @@ public class Menu extends JMenuBar {
 	private JMenuItem		resample;
 	
 	
+	private JMenu		affichage;
+	private JMenuItem		brush_editor;
+	
+	
 	private JMenu		about;
 	private JMenuItem		du_projet;
 	
@@ -38,6 +42,7 @@ public class Menu extends JMenuBar {
 		
 		initFichier();
 		initPeriode();
+		initAffichage();
 		initAbout();
 	}
 	
@@ -92,6 +97,17 @@ public class Menu extends JMenuBar {
 		periode.add(resample);
 		
 		add(periode);
+	}
+	
+	private void initAffichage() {
+		affichage = new JMenu("Affichage");
+		brush_editor = new JMenuItem("Editeur de pinceau");
+		
+		brush_editor.addActionListener(new Control(Control.OPEN_BRUSH_EDITOR));
+		
+		affichage.add(brush_editor);
+		
+		add(affichage);
 	}
 	
 	private void initAbout() {

@@ -29,4 +29,10 @@ public class ChutTool extends ToolAdapter {
 		}
 	}
 
+
+	@Override
+	public String getName() {
+		return "Attenuer";
+	}
+
 }

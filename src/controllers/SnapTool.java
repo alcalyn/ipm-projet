@@ -53,6 +53,12 @@ public class SnapTool extends ToolAdapter {
 		if(r < 0) r += mod;
 		return r;
 	}
+
+
+	@Override
+	public String getName() {
+		return "Serpent";
+	}
 	
 	
 }
