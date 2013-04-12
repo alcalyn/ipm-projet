@@ -5,9 +5,19 @@ import java.awt.event.MouseEvent;
 import views.CourbePanel;
 
 public class WriteTool extends ToolAdapter {
-
-	public WriteTool(CourbePanel courbe_panel) {
+	
+	
+	public WriteTool(CourbePanel courbe_panel, int size) {
 		super(courbe_panel);
+		this.brush = new Brush(size);
+	}
+	
+	public int getSize() {
+		return brush.getInt(0);
+	}
+	
+	public void setSize(int size) {
+		brush.set(0, size);
 	}
 	
 	
@@ -23,7 +33,8 @@ public class WriteTool extends ToolAdapter {
 	
 	
 	private void write(int x, int y) {
-		final int brush_size = 4;
+		final int brush_size = getSize();
+		
 		double at0 = (double) (x - brush_size / 2) / (double) courbe_panel.getWidth();
 		double at1 = (double) (x + brush_size / 2) / (double) courbe_panel.getWidth();
 		double value = (double) y / (double) courbe_panel.getHeight();
@@ -38,6 +49,11 @@ public class WriteTool extends ToolAdapter {
 		
 		
 		periode.flushCourbe();
+	}
+
+	@Override
+	public String getName() {
+		return "Plume";
 	}
 
 }

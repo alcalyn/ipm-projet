@@ -22,6 +22,7 @@ public class PeriodeView extends JFrame implements Observer {
 	private JPanel center;
 	private CourbePanel panel_courbe;
 	private TabbedTools tabbed_tools;
+	private BrushEditor brush_editor = null;
 	
 	
 	private Tool tool = null;
@@ -71,9 +72,20 @@ public class PeriodeView extends JFrame implements Observer {
 		}
 	}
 	
+	public void openBrushEditor() {
+		if(brush_editor == null) {
+			brush_editor = new BrushEditor(this);
+		}
+		
+		brush_editor.setVisible(true);
+	}
+	
 	
 	public void selectTool(int tool) {
 		this.tool = Tool.getTool(tool, panel_courbe);
+		if(brush_editor != null) {
+			brush_editor.updateTool(this.tool);
+		}
 	}
 	
 	public Tool getTool() {

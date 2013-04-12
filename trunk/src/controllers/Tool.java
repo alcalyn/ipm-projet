@@ -25,12 +25,20 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 	
 	
 	protected CourbePanel courbe_panel;
+	protected Brush brush;
 	
 	
 	
 	public Tool(CourbePanel courbe_panel) {
 		this.courbe_panel = courbe_panel;
+		this.brush = new Brush();
 	}
+	
+	public Brush getBrush() {
+		return brush;
+	}
+	
+	public abstract String getName();
 	
 	
 	public static Tool getTool(int tool, CourbePanel courbe_panel) {
@@ -41,7 +49,7 @@ public abstract class Tool implements MouseListener, MouseMotionListener {
 				break;
 			
 			case WRITE:
-				singletons.put(tool, new WriteTool(courbe_panel));
+				singletons.put(tool, new WriteTool(courbe_panel, 4));
 				break;
 			
 			case CHUT:

@@ -35,7 +35,8 @@ public class Control implements ActionListener {
 		SELECT_TOOL = 19,
 		MODULER = 20,
 		ADD_MODULATION = 21,
-		RESAMPLE = 22;
+		RESAMPLE = 22,
+		OPEN_BRUSH_EDITOR = 23;
 	
 	
 	private static Periode periode;
@@ -210,6 +211,10 @@ public class Control implements ActionListener {
 					periode.sampling(Integer.parseInt(s));
 				}
 				
+				break;
+			
+			case OPEN_BRUSH_EDITOR:
+				periode_view.openBrushEditor();
 				break;
 				
 			default:

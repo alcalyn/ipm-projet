@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 
 import views.CourbePanel;
 
-public class ToolAdapter extends Tool {
+public abstract class ToolAdapter extends Tool {
 
 	public ToolAdapter(CourbePanel courbe_panel) {
 		super(courbe_panel);
