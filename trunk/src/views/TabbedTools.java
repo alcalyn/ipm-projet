@@ -70,6 +70,7 @@ public class TabbedTools extends JPanel {
 		lecture.add(createButton("Lire", Control.PLAY, "play.png"));
 		lecture.add(createButton("Arreter", Control.STOP, "pause.png"));
 		lecture.add(new DureeSlider());
+		lecture.add(new LabelDuree());
 		periode.add(lecture);
 		
 		tabs.addTab("Periode", null, periode, "Parametres de la periode");

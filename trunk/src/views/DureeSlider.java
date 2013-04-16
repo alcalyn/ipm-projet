@@ -8,7 +8,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import model.ModelUpdate;
-
 import controllers.Control;
 
 public class DureeSlider extends JSlider implements Observer {
@@ -25,8 +24,8 @@ public class DureeSlider extends JSlider implements Observer {
 	public DureeSlider() {
 		Control.getPeriode().addObserver(this);
 		
-		setMinimum(- precision);
-		setMaximum(precision);
+		setMinimum(- 1100);
+		setMaximum(300);
 		
 		addChangeListener(new ChangeListener() {
 			
