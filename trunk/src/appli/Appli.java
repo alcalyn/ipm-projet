@@ -13,9 +13,6 @@ public class Appli {
 	
 	
 	public static void main(String[] args) throws Exception {
-		
-		System.out.println("start");
-		
 		Periode periode = new Periode();
 		
 		Tool.setPeriode(periode);
@@ -32,8 +29,6 @@ public class Appli {
 		periode.duree(1.0 / 440.0);
 		view.selectTool(Tool.SNAP);
 		PeriodeReader.prepare(periode);
-		
-		//System.out.println("end");
 	}
 
 }

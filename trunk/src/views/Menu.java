@@ -117,7 +117,7 @@ public class Menu extends JMenuBar {
 	private void initAbout() {
 		about = new JMenu("?");
 		
-		du_projet = new JMenuItem("... du projet");
+		du_projet = new JMenuItem("A propos du projet");
 		
 		du_projet.addActionListener(new Control(Control.DISPLAY_ABOUT_PROJECT));
 		
