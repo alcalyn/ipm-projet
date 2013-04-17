@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import model.FileManager;
 import model.Fonction;
 import model.Modulation;
+import model.Note;
+import model.Note.NoteFormatException;
 import model.Periode;
 import model.PeriodeReader;
 import views.About;
@@ -36,7 +38,8 @@ public class Control implements ActionListener {
 		MODULER = 20,
 		ADD_MODULATION = 21,
 		RESAMPLE = 22,
-		OPEN_BRUSH_EDITOR = 23;
+		OPEN_BRUSH_EDITOR = 23,
+		CHANGE_NOTE = 24;
 	
 	
 	private static Periode periode;
@@ -149,6 +152,26 @@ public class Control implements ActionListener {
 				if(s != null) {
 					double d = Double.parseDouble(s);
 					periode.duree(1.0 / d);
+				}
+				
+				break;
+			
+			case CHANGE_NOTE:
+				s = (String) JOptionPane.showInputDialog(
+						periode_view,
+						"Note de la période (exemples : 'Do#', 'mib4', 'SOL # -1') :",
+						"Parametre de la periode",
+						JOptionPane.INFORMATION_MESSAGE
+				);
+				
+				if(s != null) {
+					double d;
+					try {
+						d = Note.getFrequency(s);
+						periode.duree(1.0 / d);
+					} catch (NoteFormatException e1) {
+						error(e1.getMessage());
+					}
 				}
 				
 				break;
