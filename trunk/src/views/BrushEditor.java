@@ -29,6 +29,7 @@ public class BrushEditor extends JFrame {
 		setSize(200, 200);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setAlwaysOnTop(true);
 		
 		tool_panel = createPanel(this.periode_view.getTool());
 		add(tool_panel);
