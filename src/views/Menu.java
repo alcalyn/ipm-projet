@@ -1,8 +1,12 @@
 package views;
 
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 import controllers.Control;
 
@@ -62,6 +66,10 @@ public class Menu extends JMenuBar {
 		save.addActionListener(new Control(Control.SAVE));
 		save_as.addActionListener(new Control(Control.SAVE_AS));
 		quit.addActionListener(new Control(Control.QUIT));
+		
+		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		
 		fichier.add(nouveau);
 		fichier.add(open);
